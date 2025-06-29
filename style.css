@@ -1,0 +1,42 @@
+:root {
+    --background1: #211C1E;
+    --background2: #2C2628;
+    --text: #111111;
+    --main: #80FF00;
+}
+
+body {
+    font-family: 'Montserrat';
+    font-weight: light;
+    background-color: var(--background1);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: var(--background2);
+    padding: 0 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+body {
+    padding-top: 65px;
+}
+
+.featured {
+    color: white;
+    text-shadow:
+        -2px -2px 0 var(--text),
+        2px -2px 0 var(--text),
+        -2px 2px 0 var(--text),
+        2px 2px 0 var(--text);
+}
+
+.colored {
+    color: var(--main);
+    display: inline-block;
+}
