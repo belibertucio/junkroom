@@ -15,11 +15,6 @@ body {
     background-color: var(--bg1);
     padding-top: 65px;
     color: var(--Ltext);
-    text-shadow:
-        -1px -1px 0 var(--Dtext),
-        1px -1px 0 var(--Dtext),
-        -1px 1px 0 var(--Dtext),
-        1px 1px 0 var(--Dtext);
 }
 
 header {
@@ -50,7 +45,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg2);
-    padding: 1rem 1rem;
+    padding: 0.75rem 0.75rem;
     border-radius: 100em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -61,15 +56,21 @@ header {
 }
 
 #action-bar:hover {
-    gap: 1.5em;
+    gap: 1.25em;
 }
 
 .button {
     background: var(--bg1);
     border: none;
-    border-radius: 100%;
+    border-radius: 100em;
     padding: 1.5em 1.5em;
+    width: 1rem;
+    height: 1rem;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main);
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
 }
@@ -77,6 +78,16 @@ header {
 .button:hover {
     background: var(--bg3);
     transform: scale(1.1);
+}
+
+.button svg {
+    width: 30px;
+    height: 30px;
+    color: var(--main);
+}
+
+.button svg:hover {
+    color: var(--main2);
 }
 
 .card {
