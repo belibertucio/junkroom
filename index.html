@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
       rel="stylesheet"/>
     <link rel="stylesheet" href="style.css" />
@@ -11,9 +11,10 @@
   <body>
     <header id="header">
       <svg class="icon" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M58.9 42.1c3-6.1 9.6-9.6 16.3-8.7L320 64 564.8 33.4c6.7-.8 13.3 2.7 16.3 8.7l41.7 83.4c9 17.9-.6 39.6-19.8 45.1L439.6 217.3c-13.9 4-28.8-1.9-36.2-14.3L320 64 236.6 203c-7.4 12.4-22.3 18.3-36.2 14.3L37.1 170.6c-19.3-5.5-28.8-27.2-19.8-45.1L58.9 42.1zM321.1 128l54.9 91.4c14.9 24.8 44.6 36.6 72.5 28.6L576 211.6l0 167c0 22-15 41.2-36.4 46.6l-204.1 51c-10.2 2.6-20.9 2.6-31 0l-204.1-51C79 419.7 64 400.5 64 378.5l0-167L191.6 248c27.8 8 57.6-3.8 72.5-28.6L318.9 128l2.2 0z" fill="chartreuse" stroke="none" stroke-width="25"/></svg>
-      <h1>Junkr<span class="colored">o</span><span class="colored">o</span>m</h1>
+      <h1>Junkr<span class="oo">o</span><span class="oo">o</span>m</h1>
     </header>
     <div id="workspace">
+      <div id="grid-visual"></div>
       <div id="action-bar">
         <button id="add-card-button" class="button"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg></button>
         <button id="add-link-button" class="button"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">   <path fill="currentColor" d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4c-56.5 82.5-50 161.3 0 211.3c56.5 56.5 148 56.5 204.5 0l127.6-127.4zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4c-32.1 22.9-76 19.3-103.8-8.6c-31.5-31.5-31.5-82.5 0-114L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4c56.5-82.5 50-161.3 0-211.3c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg></button>
@@ -24,6 +25,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="card.js"></script>
+    <script src="link.js"></script>
     <script src="script.js"></script>
     <script src="anime.js"></script>
   </body>

@@ -4,15 +4,22 @@ function makeCardDraggable(el, handle) {
     let offsetX, offsetY, isDragging = false;
     const gridSize = 50;
     const workspace = document.getElementById('workspace');
-    let topZ = 1;
 
     handle.addEventListener('mousedown', (e) => {
         isDragging = true;
         offsetX = e.clientX - el.offsetLeft;
         offsetY = e.clientY - el.offsetTop;
-        el.style.cursor = 'grabbing';
-        topZ++;
-        el.style.zIndex = topZ;
+        handle.style.cursor = 'grabbing';
+
+        const cards = document.querySelectorAll('.card');
+        let maxZ = 0;
+
+        cards.forEach(card => {
+            const z = parseInt(card.style.zIndex) || 0;
+            if (z > maxZ) maxZ = z;
+        });
+
+        el.style.zIndex = maxZ + 1;
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -24,7 +31,7 @@ function makeCardDraggable(el, handle) {
     document.addEventListener('mouseup', () => {
         if (!isDragging) return;
         isDragging = false;
-        el.style.cursor = 'grab';
+        handle.style.cursor = 'grab';
 
         const workspaceRect = workspace.getBoundingClientRect();
         const maxX = workspace.clientWidth - el.offsetWidth;
@@ -49,43 +56,52 @@ function makeCardDraggable(el, handle) {
 }
 
 
-function makeCardResizable(el) {
-    const minWidth = 100;
-    const minHeight = 100;
-    let isResizingX = false;
-    let isResizingY = false;
-    let startX, startY, startWidth, startHeight;
+function makeCardResizable(card) {
+    const gridSize = 25;
 
-    el.addEventListener('mousedown', (e) => {
-        const rect = el.getBoundingClientRect();
+    card.addEventListener('mousedown', (e) => {
+        const isBottom = e.target === card && e.offsetY > card.clientHeight - 10;
+        const isRight = e.target === card && e.offsetX > card.clientWidth - 10;
 
-        if (e.offsetX > rect.width - 10) {
-            isResizingX = true;
-            startX = e.clientX;
-            startWidth = rect.width;
-            e.preventDefault();
-        }
-        if (e.offsetY > rect.height - 10) {
-            isResizingY = true;
-            startY = e.clientY;
-            startHeight = rect.height;
-            e.preventDefault();
-        }
-    });
+        if (!isBottom && !isRight) return;
 
-    document.addEventListener('mousemove', (e) => {
-        if (isResizingX) {
-            const newWidth = Math.max(minWidth, startWidth + (e.clientX - startX));
-            el.style.width = `${newWidth}px`;
-        }
-        if (isResizingY) {
-            const newHeight = Math.max(minHeight, startHeight + (e.clientY - startY));
-            el.style.height = `${newHeight}px`;
-        }
-    });
+        let startX = e.clientX;
+        let startY = e.clientY;
+        let startWidth = card.offsetWidth;
+        let startHeight = card.offsetHeight;
 
-    document.addEventListener('mouseup', () => {
-        isResizingX = false;
-        isResizingY = false;
+        const resizeBoth = isBottom && isRight;
+
+        function onMouseMove(ev) {
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+
+            if (isRight || resizeBoth) {
+                newWidth = startWidth + (ev.clientX - startX);
+                newWidth = Math.max(100, Math.round(newWidth / gridSize) * gridSize);
+            }
+
+            if (isBottom || resizeBoth) {
+                newHeight = startHeight + (ev.clientY - startY);
+                newHeight = Math.max(100, Math.round(newHeight / gridSize) * gridSize);
+            }
+
+            anime({
+                targets: card,
+                width: newWidth,
+                height: newHeight,
+                duration: 25,
+                easing: 'easeOutSine'
+            });
+        }
+
+        function onMouseUp() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+        e.stopPropagation();
     });
 }
